@@ -1,0 +1,69 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Listado de usuarios</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a class="text-right badge badge-primary" [routerLink]="['user_register']">Crear usuario</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col">email</th>
+              <th scope="col">identification</th>
+              <th scope="col">role_id</th>
+              <th scope="col">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: pageActual } ">
+              <th scope="row">
+                <div class="media align-items-center">
+                  <a href="" class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder" src="https://xsgames.co/randomusers/avatar.php?g=female">
+                  </a>
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">{{user.name}}</span>
+                  </div>
+                </div>
+              </th>
+              <td>
+                {{user.email}}
+              </td>
+              <td>
+                {{user.identification}}
+              </td>
+              <td>
+                {{user.role_id}}
+              </td>
+              <td class="text-right">
+                <div class="col-6 text-right">
+                  <a class="text-right badge badge-primary" [routerLink]="['user_update', user.id]">Editar usuario</a>
+                  <button class= "text-right badge badge-primary" (click)="delete(user.id)">Eliminar usuario</button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <pagination-controls class="text-center" previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="pageActual = $event"></pagination-controls>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
